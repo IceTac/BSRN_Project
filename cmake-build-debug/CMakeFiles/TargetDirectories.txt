@@ -1,3 +1,6 @@
-/home/tonytrouble/BSRN_Project/cmake-build-debug/CMakeFiles/BSRN_Project.dir
+/home/tonytrouble/BSRN_Project/cmake-build-debug/CMakeFiles/Project_TCPClient.dir
+/home/tonytrouble/BSRN_Project/cmake-build-debug/CMakeFiles/Project_TCPServer.dir
+/home/tonytrouble/BSRN_Project/cmake-build-debug/CMakeFiles/Project_UDPClient.dir
+/home/tonytrouble/BSRN_Project/cmake-build-debug/CMakeFiles/Project_UDPServer.dir
 /home/tonytrouble/BSRN_Project/cmake-build-debug/CMakeFiles/edit_cache.dir
 /home/tonytrouble/BSRN_Project/cmake-build-debug/CMakeFiles/rebuild_cache.dir

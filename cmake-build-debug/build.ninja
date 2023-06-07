@@ -41,66 +41,128 @@ include CMakeFiles/rules.ninja
 
 cmake_ninja_workdir = /home/tonytrouble/BSRN_Project/cmake-build-debug/
 # =============================================================================
-# Object build statements for EXECUTABLE target Project_Client
+# Object build statements for EXECUTABLE target Project_TCPClient
 
 
 #############################################
-# Order-only phony target for Project_Client
+# Order-only phony target for Project_TCPClient
 
-build cmake_object_order_depends_target_Project_Client: phony || CMakeFiles/Project_Client.dir
+build cmake_object_order_depends_target_Project_TCPClient: phony || CMakeFiles/Project_TCPClient.dir
 
-build CMakeFiles/Project_Client.dir/TCPClient.c.o: C_COMPILER__Project_Client_Debug /home/tonytrouble/BSRN_Project/TCPClient.c || cmake_object_order_depends_target_Project_Client
-  DEP_FILE = CMakeFiles/Project_Client.dir/TCPClient.c.o.d
+build CMakeFiles/Project_TCPClient.dir/TCPClient.c.o: C_COMPILER__Project_TCPClient_Debug /home/tonytrouble/BSRN_Project/TCPClient.c || cmake_object_order_depends_target_Project_TCPClient
+  DEP_FILE = CMakeFiles/Project_TCPClient.dir/TCPClient.c.o.d
   FLAGS = -g -fdiagnostics-color=always -std=gnu11
-  OBJECT_DIR = CMakeFiles/Project_Client.dir
-  OBJECT_FILE_DIR = CMakeFiles/Project_Client.dir
+  OBJECT_DIR = CMakeFiles/Project_TCPClient.dir
+  OBJECT_FILE_DIR = CMakeFiles/Project_TCPClient.dir
 
 
 # =============================================================================
-# Link build statements for EXECUTABLE target Project_Client
+# Link build statements for EXECUTABLE target Project_TCPClient
 
 
 #############################################
-# Link the executable Project_Client
+# Link the executable Project_TCPClient
 
-build Project_Client: C_EXECUTABLE_LINKER__Project_Client_Debug CMakeFiles/Project_Client.dir/TCPClient.c.o
+build Project_TCPClient: C_EXECUTABLE_LINKER__Project_TCPClient_Debug CMakeFiles/Project_TCPClient.dir/TCPClient.c.o
   FLAGS = -g
-  OBJECT_DIR = CMakeFiles/Project_Client.dir
+  OBJECT_DIR = CMakeFiles/Project_TCPClient.dir
   POST_BUILD = :
   PRE_LINK = :
-  TARGET_FILE = Project_Client
-  TARGET_PDB = Project_Client.dbg
+  TARGET_FILE = Project_TCPClient
+  TARGET_PDB = Project_TCPClient.dbg
 
 # =============================================================================
-# Object build statements for EXECUTABLE target Project_Server
+# Object build statements for EXECUTABLE target Project_TCPServer
 
 
 #############################################
-# Order-only phony target for Project_Server
+# Order-only phony target for Project_TCPServer
 
-build cmake_object_order_depends_target_Project_Server: phony || CMakeFiles/Project_Server.dir
+build cmake_object_order_depends_target_Project_TCPServer: phony || CMakeFiles/Project_TCPServer.dir
 
-build CMakeFiles/Project_Server.dir/TCPServer.c.o: C_COMPILER__Project_Server_Debug /home/tonytrouble/BSRN_Project/TCPServer.c || cmake_object_order_depends_target_Project_Server
-  DEP_FILE = CMakeFiles/Project_Server.dir/TCPServer.c.o.d
+build CMakeFiles/Project_TCPServer.dir/TCPServer.c.o: C_COMPILER__Project_TCPServer_Debug /home/tonytrouble/BSRN_Project/TCPServer.c || cmake_object_order_depends_target_Project_TCPServer
+  DEP_FILE = CMakeFiles/Project_TCPServer.dir/TCPServer.c.o.d
   FLAGS = -g -fdiagnostics-color=always -std=gnu11
-  OBJECT_DIR = CMakeFiles/Project_Server.dir
-  OBJECT_FILE_DIR = CMakeFiles/Project_Server.dir
+  OBJECT_DIR = CMakeFiles/Project_TCPServer.dir
+  OBJECT_FILE_DIR = CMakeFiles/Project_TCPServer.dir
 
 
 # =============================================================================
-# Link build statements for EXECUTABLE target Project_Server
+# Link build statements for EXECUTABLE target Project_TCPServer
 
 
 #############################################
-# Link the executable Project_Server
+# Link the executable Project_TCPServer
 
-build Project_Server: C_EXECUTABLE_LINKER__Project_Server_Debug CMakeFiles/Project_Server.dir/TCPServer.c.o
+build Project_TCPServer: C_EXECUTABLE_LINKER__Project_TCPServer_Debug CMakeFiles/Project_TCPServer.dir/TCPServer.c.o
   FLAGS = -g
-  OBJECT_DIR = CMakeFiles/Project_Server.dir
+  OBJECT_DIR = CMakeFiles/Project_TCPServer.dir
   POST_BUILD = :
   PRE_LINK = :
-  TARGET_FILE = Project_Server
-  TARGET_PDB = Project_Server.dbg
+  TARGET_FILE = Project_TCPServer
+  TARGET_PDB = Project_TCPServer.dbg
+
+# =============================================================================
+# Object build statements for EXECUTABLE target Project_UDPClient
+
+
+#############################################
+# Order-only phony target for Project_UDPClient
+
+build cmake_object_order_depends_target_Project_UDPClient: phony || CMakeFiles/Project_UDPClient.dir
+
+build CMakeFiles/Project_UDPClient.dir/UDPClient.c.o: C_COMPILER__Project_UDPClient_Debug /home/tonytrouble/BSRN_Project/UDPClient.c || cmake_object_order_depends_target_Project_UDPClient
+  DEP_FILE = CMakeFiles/Project_UDPClient.dir/UDPClient.c.o.d
+  FLAGS = -g -fdiagnostics-color=always -std=gnu11
+  OBJECT_DIR = CMakeFiles/Project_UDPClient.dir
+  OBJECT_FILE_DIR = CMakeFiles/Project_UDPClient.dir
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target Project_UDPClient
+
+
+#############################################
+# Link the executable Project_UDPClient
+
+build Project_UDPClient: C_EXECUTABLE_LINKER__Project_UDPClient_Debug CMakeFiles/Project_UDPClient.dir/UDPClient.c.o
+  FLAGS = -g
+  OBJECT_DIR = CMakeFiles/Project_UDPClient.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = Project_UDPClient
+  TARGET_PDB = Project_UDPClient.dbg
+
+# =============================================================================
+# Object build statements for EXECUTABLE target Project_UDPServer
+
+
+#############################################
+# Order-only phony target for Project_UDPServer
+
+build cmake_object_order_depends_target_Project_UDPServer: phony || CMakeFiles/Project_UDPServer.dir
+
+build CMakeFiles/Project_UDPServer.dir/UDPServer.c.o: C_COMPILER__Project_UDPServer_Debug /home/tonytrouble/BSRN_Project/UDPServer.c || cmake_object_order_depends_target_Project_UDPServer
+  DEP_FILE = CMakeFiles/Project_UDPServer.dir/UDPServer.c.o.d
+  FLAGS = -g -fdiagnostics-color=always -std=gnu11
+  OBJECT_DIR = CMakeFiles/Project_UDPServer.dir
+  OBJECT_FILE_DIR = CMakeFiles/Project_UDPServer.dir
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target Project_UDPServer
+
+
+#############################################
+# Link the executable Project_UDPServer
+
+build Project_UDPServer: C_EXECUTABLE_LINKER__Project_UDPServer_Debug CMakeFiles/Project_UDPServer.dir/UDPServer.c.o
+  FLAGS = -g
+  OBJECT_DIR = CMakeFiles/Project_UDPServer.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = Project_UDPServer
+  TARGET_PDB = Project_UDPServer.dbg
 
 
 #############################################
@@ -136,7 +198,7 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 #############################################
 # Folder: /home/tonytrouble/BSRN_Project/cmake-build-debug
 
-build all: phony Project_Client Project_Server
+build all: phony Project_TCPClient Project_TCPServer Project_UDPClient Project_UDPServer
 
 # =============================================================================
 # Built-in targets
