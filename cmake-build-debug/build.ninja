@@ -164,6 +164,37 @@ build Project_UDPServer: C_EXECUTABLE_LINKER__Project_UDPServer_Debug CMakeFiles
   TARGET_FILE = Project_UDPServer
   TARGET_PDB = Project_UDPServer.dbg
 
+# =============================================================================
+# Object build statements for EXECUTABLE target CLI1
+
+
+#############################################
+# Order-only phony target for CLI1
+
+build cmake_object_order_depends_target_CLI1: phony || CMakeFiles/CLI1.dir
+
+build CMakeFiles/CLI1.dir/CLI-Ideen/CLITest1.c.o: C_COMPILER__CLI1_Debug /home/tonytrouble/BSRN_Project/CLI-Ideen/CLITest1.c || cmake_object_order_depends_target_CLI1
+  DEP_FILE = CMakeFiles/CLI1.dir/CLI-Ideen/CLITest1.c.o.d
+  FLAGS = -g -fdiagnostics-color=always -std=gnu11
+  OBJECT_DIR = CMakeFiles/CLI1.dir
+  OBJECT_FILE_DIR = CMakeFiles/CLI1.dir/CLI-Ideen
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target CLI1
+
+
+#############################################
+# Link the executable CLI1
+
+build CLI1: C_EXECUTABLE_LINKER__CLI1_Debug CMakeFiles/CLI1.dir/CLI-Ideen/CLITest1.c.o
+  FLAGS = -g
+  OBJECT_DIR = CMakeFiles/CLI1.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = CLI1
+  TARGET_PDB = CLI1.dbg
+
 
 #############################################
 # Utility command for edit_cache
@@ -198,7 +229,7 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 #############################################
 # Folder: /home/tonytrouble/BSRN_Project/cmake-build-debug
 
-build all: phony Project_TCPClient Project_TCPServer Project_UDPClient Project_UDPServer
+build all: phony Project_TCPClient Project_TCPServer Project_UDPClient Project_UDPServer CLI1
 
 # =============================================================================
 # Built-in targets
