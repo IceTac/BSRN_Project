@@ -1,0 +1,3 @@
+/home/tonytrouble/BSRN_Project/cmake-build-debug/CMakeFiles/BSRN_Project.dir
+/home/tonytrouble/BSRN_Project/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/tonytrouble/BSRN_Project/cmake-build-debug/CMakeFiles/rebuild_cache.dir
