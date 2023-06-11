@@ -1,6 +1,7 @@
 #include <stdio.h>
-
+#include <stdlib.h>
 int main() {
-    printf("Hello, World!\n");
+    system("gnome-terminal -- ./TCP/TCPServer");
+    system("./TCP/TCPClient");
     return 0;
 }
