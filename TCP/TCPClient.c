@@ -9,6 +9,7 @@
 #define MAX 80
 #define PORT 8080
 #define SA struct sockaddr
+
 void func(int sockfd)
 {
     char buff[MAX];
@@ -17,12 +18,16 @@ void func(int sockfd)
         bzero(buff, sizeof(buff));
         printf("Enter the string : ");
         n = 0;
-        while ((buff[n++] = getchar()) != '\n')
-            ;
+        while ((buff[n++] = getchar()) != '\n');
         write(sockfd, buff, sizeof(buff));
+        if ((strncmp(buff, "exit", 4)) == 0) {
+            printf("Client Exit...\n");
+            break;
+        }
         bzero(buff, sizeof(buff));
+
         read(sockfd, buff, sizeof(buff));
-        printf("From Server : %s", buff);
+        printf("From Server : %s\t", buff);
         if ((strncmp(buff, "exit", 4)) == 0) {
             printf("Client Exit...\n");
             break;
@@ -45,14 +50,18 @@ int main()
         printf("Socket successfully created..\n");
     bzero(&servaddr, sizeof(servaddr));
 
+    //Get the IP-Adress from user
+    char ipAdress[20];
+    printf("Please enter an IP-Adress:\n");
+    scanf("%s", ipAdress);
+
     // assign IP, PORT
     servaddr.sin_family = AF_INET;
-    servaddr.sin_addr.s_addr = inet_addr("127.0.0.1");
+    servaddr.sin_addr.s_addr = inet_addr(ipAdress);
     servaddr.sin_port = htons(PORT);
 
     // connect the client socket to server socket
-    if (connect(sockfd, (SA*)&servaddr, sizeof(servaddr))
-        != 0) {
+    if (connect(sockfd, (SA*)&servaddr, sizeof(servaddr)) != 0) {
         printf("connection with the server failed...\n");
         exit(0);
     }

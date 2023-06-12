@@ -1,6 +1,6 @@
-// udp client driver program
 #include <stdio.h>
 #include <strings.h>
+#include <string.h>
 #include <sys/types.h>
 #include <arpa/inet.h>
 #include <sys/socket.h>
@@ -15,7 +15,6 @@
 int main()
 {
     char buffer[100];
-    char *message = "Hello Server";
     int sockfd, n;
     struct sockaddr_in servaddr;
 
@@ -34,16 +33,22 @@ int main()
         printf("\n Error : Connect Failed \n");
         exit(0);
     }
+    int x;
+    for(;;) {
+        // request to send datagram
+        // no need to specify server address in sendto
+        // connect stores the peers IP and port
+        while ((buffer[x++] = getchar()) != '\n');
+        sendto(sockfd, buffer, MAXLINE, 0, (struct sockaddr *) NULL, sizeof(servaddr));
 
-    // request to send datagram
-    // no need to specify server address in sendto
-    // connect stores the peers IP and port
-    sendto(sockfd, message, MAXLINE, 0, (struct sockaddr*)NULL, sizeof(servaddr));
-
-    // waiting for response
-    recvfrom(sockfd, buffer, sizeof(buffer), 0, (struct sockaddr*)NULL, NULL);
-    puts(buffer);
-
+        // waiting for response
+        recvfrom(sockfd, buffer, sizeof(buffer), 0, (struct sockaddr *) NULL, NULL);
+        puts(buffer);
+        if ((strncmp(buffer, "exit", 4)) == 0) {
+            printf("Client Exit...\n");
+            break;
+        }
+    }
     // close the descriptor
     close(sockfd);
 }

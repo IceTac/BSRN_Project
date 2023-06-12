@@ -1,6 +1,7 @@
 // server program for udp connection
 #include <stdio.h>
 #include <strings.h>
+#include <string.h>
 #include <sys/types.h>
 #include <arpa/inet.h>
 #include <sys/socket.h>
@@ -12,7 +13,6 @@
 int main()
 {
     char buffer[100];
-    char *message = "Hello Client";
     int listenfd, len;
     struct sockaddr_in servaddr, cliaddr;
     bzero(&servaddr, sizeof(servaddr));
@@ -28,12 +28,21 @@ int main()
 
     //receive the datagram
     len = sizeof(cliaddr);
-    int n = recvfrom(listenfd, buffer, sizeof(buffer),
-                     0, (struct sockaddr*)&cliaddr,&len); //receive message from server
-    buffer[n] = '\0';
-    puts(buffer);
+    int x;
+    for(;;) {
+        x=0;
+        //receive message from server
+        int n = recvfrom(listenfd, buffer, sizeof(buffer), 0, (struct sockaddr *) &cliaddr, &len);
+        if ((strncmp(buffer, "exit", 4)) == 0) {
+            printf("Server Exit...\n");
+            break;
+        }
+        buffer[n] = '\0';
+        puts(buffer);
 
-    // send the response
-    sendto(listenfd, message, MAXLINE, 0,
-           (struct sockaddr*)&cliaddr, sizeof(cliaddr));
+        // send the response
+        while ((buffer[x++] = getchar()) != '\n');
+        sendto(listenfd, buffer, MAXLINE, 0,
+               (struct sockaddr *) &cliaddr, sizeof(cliaddr));
+    }
 }
