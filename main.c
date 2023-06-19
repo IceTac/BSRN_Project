@@ -23,7 +23,7 @@ void optionFive(){
     printf("Option 5\n");
 }
 void optionExit(){
-    printf("Exit");
+    printf("Exit\n");
 }
 
 int main() {
@@ -45,13 +45,11 @@ int main() {
             continue;
         }
         if(option == 0){
+            optionExit();
             break;
         }
 
         switch (option) {
-            case 0:
-                optionExit();
-                break;
             case 1:
                 optionOne();
                 break;

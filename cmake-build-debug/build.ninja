@@ -226,6 +226,37 @@ build Main: C_EXECUTABLE_LINKER__Main_Debug CMakeFiles/Main.dir/main.c.o
   TARGET_FILE = Main
   TARGET_PDB = Main.dbg
 
+# =============================================================================
+# Object build statements for EXECUTABLE target PCAP
+
+
+#############################################
+# Order-only phony target for PCAP
+
+build cmake_object_order_depends_target_PCAP: phony || CMakeFiles/PCAP.dir
+
+build CMakeFiles/PCAP.dir/network.c.o: C_COMPILER__PCAP_Debug /home/tonytrouble/BSRN_Project/network.c || cmake_object_order_depends_target_PCAP
+  DEP_FILE = CMakeFiles/PCAP.dir/network.c.o.d
+  FLAGS = -g -fdiagnostics-color=always -std=gnu11
+  OBJECT_DIR = CMakeFiles/PCAP.dir
+  OBJECT_FILE_DIR = CMakeFiles/PCAP.dir
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target PCAP
+
+
+#############################################
+# Link the executable PCAP
+
+build PCAP: C_EXECUTABLE_LINKER__PCAP_Debug CMakeFiles/PCAP.dir/network.c.o
+  FLAGS = -g
+  OBJECT_DIR = CMakeFiles/PCAP.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = PCAP
+  TARGET_PDB = PCAP.dbg
+
 
 #############################################
 # Utility command for edit_cache
@@ -260,7 +291,7 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 #############################################
 # Folder: /home/tonytrouble/BSRN_Project/cmake-build-debug
 
-build all: phony Project_TCPClient Project_TCPServer Project_UDPClient Project_UDPServer CLI1 Main
+build all: phony Project_TCPClient Project_TCPServer Project_UDPClient Project_UDPServer CLI1 Main PCAP
 
 # =============================================================================
 # Built-in targets
