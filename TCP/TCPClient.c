@@ -10,21 +10,26 @@
 #define PORT 8080
 #define SA struct sockaddr
 
-void func(int sockfd)
+void chatFunction(int sockfd)
 {
     char buff[MAX];
-    int n;
+    int n = 0;
+
     for (;;) {
-        bzero(buff, sizeof(buff));
-        printf("Enter the string : ");
+
         n = 0;
+
+        bzero(buff, MAX);
+        printf("Enter the string : ");
+
         while ((buff[n++] = getchar()) != '\n');
+
         write(sockfd, buff, sizeof(buff));
         if ((strncmp(buff, "exit", 4)) == 0) {
             printf("Client Exit...\n");
             break;
         }
-        bzero(buff, sizeof(buff));
+        bzero(buff, MAX);
 
         read(sockfd, buff, sizeof(buff));
         printf("From Server : %s\t", buff);
@@ -35,7 +40,7 @@ void func(int sockfd)
     }
 }
 
-int main()
+void creatingConnection()
 {
     int sockfd, connfd;
     struct sockaddr_in servaddr, cli;
@@ -69,8 +74,50 @@ int main()
         printf("connected to the server..\n");
 
     // function for chat
-    func(sockfd);
+    chatFunction(sockfd);
 
     // close the socket
     close(sockfd);
+}
+
+int main()
+{
+    int option;
+
+    while (1) {
+        printf("Select an option:\n");
+        printf("[1] Start the TCP-Client\n");
+        printf("[2] Start PCAP-LOG\n");
+        printf("[3] Get Service-Information\n");
+        printf("[4] Get the Host-Name\n");
+        printf("[0] To EXIT\n");
+
+        if (scanf("%d", &option) != 1) {
+            printf("Invalid input. Please enter a number.\n");
+            // Clear the input buffer
+            while (getchar() != '\n');
+            continue;
+        }
+        if(option == 0){
+            exit(EXIT_SUCCESS);
+        }
+
+        switch (option) {
+            case 1:
+                creatingConnection();
+                break;
+            case 2:
+                system("gnome-terminal -- sudo ./pcapForTCP");
+                break;
+            case 3:
+                //getservbyname();
+                break;
+            case 4:
+                //getHostName();
+                break;
+            default:
+                printf("Invalid option. Please select a valid option (1-3).\n");
+                break;
+        }
+    }
 }

@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 void optionOne(){
     printf("Creating a TCP-Connection...\n----------\n");
@@ -14,13 +15,16 @@ void optionTwo(){
     system("./UDP/UDPClient");
 }
 void optionThree(){
-    printf("Opening LOG_FILES...\n----------\n");
+    printf("Opening LOG-FILES...\n----------\n");
+    printf("Press [Q] to EXIT Log-File\n");
+    sleep(2);
+    system("sudo less tcpheaders.log");
 }
 void optionFour(){
-    printf("Option 4\n");
-}
-void optionFive(){
-    printf("Option 5\n");
+    printf("Opening LOG-FILES...\n----------\n");
+    printf("Press [Q] to EXIT Log-File\n");
+    sleep(2);
+    system("sudo less udpheaders.log");
 }
 void optionExit(){
     printf("Exit\n");
@@ -33,9 +37,8 @@ int main() {
         printf("Select an option:\n");
         printf("[1] Create TCP-Connection\n");
         printf("[2] Create UDP-Connection\n");
-        printf("[3] Open LOG_FILES of Traffic\n");
-        printf("[4] Option 4\n");
-        printf("[5] Option 5\n");
+        printf("[3] Open LOG_FILES of Traffic for TCP\n");
+        printf("[4] Open LOG_FILES of Traffic for UDP\n");
         printf("[0] To EXIT\n");
 
         if (scanf("%d", &option) != 1) {
@@ -62,11 +65,8 @@ int main() {
             case 4:
                 optionFour();
                 break;
-            case 5:
-                optionFive();
-                break;
             default:
-                printf("Invalid option. Please select a valid option (1-5).\n");
+                printf("Invalid option. Please select a valid option (1-3).\n");
                 break;
         }
     }

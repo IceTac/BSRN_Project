@@ -235,8 +235,8 @@ build Main: C_EXECUTABLE_LINKER__Main_Debug CMakeFiles/Main.dir/main.c.o
 
 build cmake_object_order_depends_target_PCAP: phony || CMakeFiles/PCAP.dir
 
-build CMakeFiles/PCAP.dir/network.c.o: C_COMPILER__PCAP_Debug /home/tonytrouble/BSRN_Project/network.c || cmake_object_order_depends_target_PCAP
-  DEP_FILE = CMakeFiles/PCAP.dir/network.c.o.d
+build CMakeFiles/PCAP.dir/pcapForTCP.c.o: C_COMPILER__PCAP_Debug /home/tonytrouble/BSRN_Project/pcapForTCP.c || cmake_object_order_depends_target_PCAP
+  DEP_FILE = CMakeFiles/PCAP.dir/pcapForTCP.c.o.d
   FLAGS = -g -fdiagnostics-color=always -std=gnu11
   OBJECT_DIR = CMakeFiles/PCAP.dir
   OBJECT_FILE_DIR = CMakeFiles/PCAP.dir
@@ -249,7 +249,7 @@ build CMakeFiles/PCAP.dir/network.c.o: C_COMPILER__PCAP_Debug /home/tonytrouble/
 #############################################
 # Link the executable PCAP
 
-build PCAP: C_EXECUTABLE_LINKER__PCAP_Debug CMakeFiles/PCAP.dir/network.c.o
+build PCAP: C_EXECUTABLE_LINKER__PCAP_Debug CMakeFiles/PCAP.dir/pcapForTCP.c.o
   FLAGS = -g
   OBJECT_DIR = CMakeFiles/PCAP.dir
   POST_BUILD = :

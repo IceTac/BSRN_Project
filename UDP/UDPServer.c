@@ -1,4 +1,3 @@
-// server program for udp connection
 #include <stdio.h>
 #include <strings.h>
 #include <string.h>
@@ -7,7 +6,7 @@
 #include <sys/socket.h>
 #include<netinet/in.h>
 #define PORT 5000
-#define MAXLINE 1000
+#define MAX 80
 
 // Driver code
 int main()
@@ -19,6 +18,8 @@ int main()
 
     // Create a UDP Socket
     listenfd = socket(AF_INET, SOCK_DGRAM, 0);
+    printf("Creating Socket...\n");
+
     servaddr.sin_addr.s_addr = htonl(INADDR_ANY);
     servaddr.sin_port = htons(PORT);
     servaddr.sin_family = AF_INET;
@@ -26,11 +27,13 @@ int main()
     // bind server address to socket descriptor
     bind(listenfd, (struct sockaddr*)&servaddr, sizeof(servaddr));
 
-    //receive the datagram
-    len = sizeof(cliaddr);
-    int x;
+
     for(;;) {
-        x=0;
+        //receive the datagram
+        len = sizeof(cliaddr);
+
+        bzero(buffer, MAX);
+
         //receive message from server
         int n = recvfrom(listenfd, buffer, sizeof(buffer), 0, (struct sockaddr *) &cliaddr, &len);
         if ((strncmp(buffer, "exit", 4)) == 0) {
@@ -38,11 +41,10 @@ int main()
             break;
         }
         buffer[n] = '\0';
-        puts(buffer);
+        printf("From Client: %s", buffer);
 
         // send the response
-        while ((buffer[x++] = getchar()) != '\n');
-        sendto(listenfd, buffer, MAXLINE, 0,
-               (struct sockaddr *) &cliaddr, sizeof(cliaddr));
+        printf("Sending copy of Message as response...\n");
+        sendto(listenfd, buffer, MAX, 0, (struct sockaddr *) &cliaddr, sizeof(cliaddr));
     }
 }
