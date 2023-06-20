@@ -49,7 +49,7 @@ void parseUdpHeader(const unsigned char* packet) {
 }
 
 void packetHandler(unsigned char* userData, const struct pcap_pkthdr* pkthdr, const unsigned char* packet) {
-    printf("Packet captured\n");
+    printf("---------------\nPacket captured\n---------------\n");
     parseUdpHeader(packet);
 }
 
@@ -62,7 +62,8 @@ int main() {
     if (handle == NULL) {
         printf("Error opening device: %s\n", errbuf);
         return 1;
-    }
+    }else
+        printf("Success opening device...\n");
 
     // Set a filter if desired (optional)
     struct bpf_program fp;
@@ -77,7 +78,9 @@ int main() {
     if (pcap_setfilter(handle, &fp) == -1) {
         printf("Error setting filter: %s\n", pcap_geterr(handle));
         return 1;
-    }
+    }else
+        printf("Success setting filter...\n");
+    printf("UDP-Packet capturing is active...\n");
 
     // Start capturing packets
     pcap_loop(handle, 0, packetHandler, NULL);

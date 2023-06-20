@@ -55,7 +55,7 @@ void parseTcpHeader(const unsigned char* packet) {
 }
 
 void packetHandler(unsigned char* userData, const struct pcap_pkthdr* pkthdr, const unsigned char* packet) {
-    printf("Packet captured\n");
+    printf("---------------\nPacket captured\n--------------\n");
     parseTcpHeader(packet);
 }
 
@@ -68,22 +68,27 @@ int main() {
     if (handle == NULL) {
         printf("Error opening device: %s\n", errbuf);
         return 1;
-    }
+    }else
+        printf("Success opening device...\n");
 
-    // Set a filter if desired (optional)
+    // Set a filter
     struct bpf_program fp;
     char filter_exp[] = "tcp";
     bpf_u_int32 subnet_mask, ip;
 
+    // Compiling the filter to check existence
     if (pcap_compile(handle, &fp, filter_exp, 0, ip) == -1) {
         printf("Error compiling filter expression: %s\n", pcap_geterr(handle));
         return 1;
     }
 
+    // Setting the filter only to TCP-Packets
     if (pcap_setfilter(handle, &fp) == -1) {
         printf("Error setting filter: %s\n", pcap_geterr(handle));
         return 1;
-    }
+    }else
+        printf("Success setting filter...\n");
+    printf("TCP-Packet capturing is active...\n");
 
     // Start capturing packets
     pcap_loop(handle, 0, packetHandler, NULL);

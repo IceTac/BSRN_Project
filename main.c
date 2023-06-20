@@ -29,12 +29,22 @@ void optionFour(){
 void optionExit(){
     printf("Exit\n");
 }
+void writeMenuHello(){
+    printf("*       *  *********  **      *  *       * \n");
+    printf("**     **  **         * *     *  *       * \n");
+    printf("* *   * *  *          *  *    *  *       * \n");
+    printf("*  * *  *  *********  *   *   *  *       * \n");
+    printf("*   *   *  **         *    *  *  *       * \n");
+    printf("*       *  *          *     * *   *     *  \n");
+    printf("*       *  *********  *      **    *****   \n");
+}
 
 int main() {
     int option;
 
     while (1) {
-        printf("Select an option:\n");
+        writeMenuHello();
+        //printf("Select an option:\n");
         printf("[1] Create TCP-Connection\n");
         printf("[2] Create UDP-Connection\n");
         printf("[3] Open LOG_FILES of Traffic for TCP\n");
