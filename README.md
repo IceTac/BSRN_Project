@@ -2,14 +2,12 @@
 Project for UDP/TCP Communication in C on Linux
 - - - - - - - - - - - - - - - - - - - - - - - - 
 
-Um die TCP/UDP Anwendungen im aktuellen Modus zu starten:
+TCP/UDP Kommunikation in Linux:
 
-1. Terminal in Linux öffnen
-2. Zum richtigen Ordner im Terminal navigieren (jeweils wahrscheinlich /home/<user>/BSRN_Project/TCP | /home/<user>/BSRN_Project/UDP)
-3. Danach je nach Protokoll-Name diesen Befehl ausführen
-  1: ./TCPServer | ./UDPServer
-  2: ./TCPClient | ./UDPClient
-  !!! Wichtig IMMER erst Server dann Client
+1. Zum Starten des Programms ein Terminal öffnen
+2. Zum Ordner BSRN_Project navigieren
+3. ./main ausführen
+4. Um PCAP Fenster zu schließen 'STRG+C' drücken
+5. Um Log-Fenster zu schließen 'Q' drücken
 
-  
-Eure Ideen zu CLI(Command-Line-Interfaces) bitte in den Ordner CLI-Ideen packen
+Projekt ist damit fertig!
