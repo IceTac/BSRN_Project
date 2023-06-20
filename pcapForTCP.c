@@ -8,6 +8,10 @@ void parseTcpHeader(const unsigned char* packet) {
     // Move the packet pointer to the IP header
     const struct ip* ipHeader = (struct ip*)(packet + sizeof(struct ether_header));
 
+    //Extract the IP header fields
+    unsigned char* sourceIP = inet_ntoa(ipHeader->ip_src);
+    unsigned char* destinationIP = inet_ntoa(ipHeader->ip_dst);
+
     // Move the packet pointer to the TCP header
     const struct tcphdr* tcpHeader = (struct tcphdr*)(packet + sizeof(struct ether_header) + ipHeader->ip_hl * 4);
 
@@ -21,7 +25,9 @@ void parseTcpHeader(const unsigned char* packet) {
 
     // Print the extracted TCP header fields
     printf("Source Port: %u\n", sourcePort);
+    printf("Source IP: %s\n", sourceIP);
     printf("Destination Port: %u\n", destinationPort);
+    printf("Destination IP: %s\n", destinationIP);
     printf("Sequence Number: %u\n", sequenceNumber);
     printf("Acknowledgment Number: %u\n", acknowledgmentNumber);
     printf("Header Length: %u bytes\n", headerLength);
@@ -36,7 +42,9 @@ void parseTcpHeader(const unsigned char* packet) {
 
     // Write the TCP header information to the log file
     fprintf(logFile, "Source Port: %u\n", sourcePort);
+    fprintf(logFile,"Source IP: %s\n", sourceIP);
     fprintf(logFile, "Destination Port: %u\n", destinationPort);
+    fprintf(logFile,"Destination IP: %s\n", destinationIP);
     fprintf(logFile, "Sequence Number: %u\n", sequenceNumber);
     fprintf(logFile, "Acknowledgment Number: %u\n", acknowledgmentNumber);
     fprintf(logFile, "Header Length: %u bytes\n", headerLength);

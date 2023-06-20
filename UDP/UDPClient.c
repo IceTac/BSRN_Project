@@ -44,7 +44,6 @@ void runningChatFunction()
         printf("Connection with Server successful\n");
     }
 
-
     for(;;) {
         int x = 0;
 

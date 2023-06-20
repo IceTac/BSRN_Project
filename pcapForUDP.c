@@ -8,6 +8,10 @@ void parseUdpHeader(const unsigned char* packet) {
     // Move the packet pointer to the IP header
     const struct ip* ipHeader = (struct ip*)(packet + sizeof(struct ether_header));
 
+    //Extract IP header fields
+    unsigned char* sourceIP = inet_ntoa(ipHeader->ip_src);
+    unsigned char* destinationIP = inet_ntoa(ipHeader->ip_dst);
+
     // Move the packet pointer to the UDP header
     const struct udphdr* udpHeader = (struct udphdr*)(packet + sizeof(struct ether_header) + ipHeader->ip_hl * 4);
 
@@ -19,7 +23,9 @@ void parseUdpHeader(const unsigned char* packet) {
 
     // Print the extracted UDP header fields
     printf("Source Port: %u\n", sourcePort);
+    printf("Source IP: %s\n", sourceIP);
     printf("Destination Port: %u\n", destinationPort);
+    printf("Destination IP: %s\n", destinationIP);
     printf("Length: %u bytes\n", length);
     printf("Checksum: 0x%04X\n", checksum);
 
@@ -32,7 +38,9 @@ void parseUdpHeader(const unsigned char* packet) {
 
     // Write the UDP header information to the log file
     fprintf(logFile, "Source Port: %u\n", sourcePort);
+    fprintf(logFile,"Source IP: %s\n", sourceIP);
     fprintf(logFile, "Destination Port: %u\n", destinationPort);
+    fprintf(logFile,"Destination IP: %s\n", destinationIP);
     fprintf(logFile, "Length: %u bytes\n", length);
     fprintf(logFile, "Checksum: 0x%04X\n\n", checksum);
 
