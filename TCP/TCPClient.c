@@ -6,6 +6,7 @@
 #include <strings.h> // bzero()
 #include <sys/socket.h>
 #include <unistd.h> // read(), write(), close()
+
 #define MAX 80
 #define PORT 8080
 #define SA struct sockaddr
@@ -13,7 +14,7 @@
 void chatFunction(int sockfd)
 {
     char buff[MAX];
-    int n = 0;
+    int n;
 
     for (;;) {
 
@@ -42,8 +43,8 @@ void chatFunction(int sockfd)
 
 void creatingConnection()
 {
-    int sockfd, connfd;
-    struct sockaddr_in servaddr, cli;
+    int sockfd;
+    struct sockaddr_in servaddr;
 
     // socket create and verification
     sockfd = socket(AF_INET, SOCK_STREAM, 0);
@@ -51,14 +52,16 @@ void creatingConnection()
         printf("socket creation failed...\n");
         exit(0);
     }
-    else
+    else {
         printf("Socket successfully created..\n");
+    }
     bzero(&servaddr, sizeof(servaddr));
 
     //Get the IP-Adress from user
     char ipAdress[20];
     printf("Please enter an IP-Adress:\n");
     scanf("%s", ipAdress);
+    while (getchar() != '\n');
 
     // assign IP, PORT
     servaddr.sin_family = AF_INET;
@@ -70,14 +73,43 @@ void creatingConnection()
         printf("connection with the server failed...\n");
         exit(0);
     }
-    else
+    else {
         printf("connected to the server..\n");
+    }
 
     // function for chat
     chatFunction(sockfd);
 
     // close the socket
     close(sockfd);
+}
+
+void serviceInformation(){
+    char serviceName[20];
+    printf("Please enter a Service:\n");
+    scanf("%s", serviceName);
+    struct servent *service = getservbyname(serviceName, "tcp");
+    if (service){
+        printf("Service name is %s. Service port is %d. Protocol to use is %s\n",
+               service->s_name, ntohs(service->s_port), service->s_proto);
+    }else{
+        printf("No entry found for this service.\n");
+    }
+}
+
+void hostName(){
+    char name[20];
+    printf("Please enter a Name:\n");
+    scanf("%s", name);
+    struct hostent *host = gethostbyname(name);
+    if (host){
+        printf("Official-Host-Name is %s. ", host->h_name);
+        for (int i = 0; host->h_addr_list[i] != NULL; i++) {
+            printf("IP-Address %d: %s\n", i + 1, inet_ntoa(*(struct in_addr*)host->h_addr_list[i]));
+        }
+    }else{
+        printf("No entry found for this Host.\n");
+    }
 }
 
 int main()
@@ -110,10 +142,10 @@ int main()
                 system("gnome-terminal -- sudo ./pcapForTCP");
                 break;
             case 3:
-                //getservbyname();
+                serviceInformation();
                 break;
             case 4:
-                //getHostName();
+                hostName();
                 break;
             default:
                 printf("Invalid option. Please select a valid option (1-3).\n");

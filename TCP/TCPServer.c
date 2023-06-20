@@ -1,11 +1,10 @@
 #include <stdio.h>
-#include <netdb.h>
 #include <netinet/in.h>
 #include <stdlib.h>
 #include <string.h>
 #include <sys/socket.h>
-#include <sys/types.h>
 #include <unistd.h> // read(), write(), close()
+
 #define MAX 80
 #define PORT 8080
 #define SA struct sockaddr
@@ -52,8 +51,9 @@ int main()
         printf("socket creation failed...\n");
         exit(0);
     }
-    else
+    else {
         printf("Socket successfully created..\n");
+    }
     bzero(&servaddr, sizeof(servaddr));
 
     // assign IP, PORT
@@ -66,16 +66,18 @@ int main()
         printf("socket bind failed...\n");
         exit(0);
     }
-    else
+    else {
         printf("Socket successfully binded..\n");
+    }
 
     // Now server is ready to listen and verification
     if ((listen(sockfd, 5)) != 0) {
         printf("Listen failed...\n");
         exit(0);
     }
-    else
+    else {
         printf("Server listening..\n");
+    }
     len = sizeof(cli);
 
     // Accept the data packet from client and verification

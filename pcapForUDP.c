@@ -24,7 +24,7 @@ void parseUdpHeader(const unsigned char* packet) {
     printf("Checksum: 0x%04X\n", checksum);
 
     // Open the log file in append mode
-    FILE* logFile = fopen("udpheaders.log", "w");
+    FILE* logFile = fopen("udpheaders.log", "a");
     if (logFile == NULL) {
         printf("Error opening log file\n");
         return;

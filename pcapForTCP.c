@@ -28,7 +28,7 @@ void parseTcpHeader(const unsigned char* packet) {
     printf("Flags: 0x%02X\n", flags);
 
     // Open the log file in append mode
-    FILE* logFile = fopen("tcpheaders.log", "w");
+    FILE* logFile = fopen("tcpheaders.log", "a");
     if (logFile == NULL) {
         printf("Error opening log file\n");
         return;
