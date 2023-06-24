@@ -70,11 +70,16 @@ void runningChatFunction()
     close(sockfd);
 }
 
+// Methode um Name, Port und Protokoll eines Services herauszufinden
 void serviceInformation(){
+    // Variable für den Namen der vom Nutzer eingegeben wird
     char serviceName[20];
     printf("Please enter a Service:\n");
+    // Standard Eingabe
     scanf("%s", serviceName);
+    // Structure um die getservbyname Methode auszuführen und die Rückgabewerte zu speichern
     struct servent *service = getservbyname(serviceName, "udp");
+    // Abfrage um zu gucken, ob es Infos zum eingegeben Service gibt oder nicht, Ausgabe & Fehler-Meldung
     if (service){
         printf("Service name is %s. Service port is %d. Protocol to use is %s\n",
                service->s_name, ntohs(service->s_port), service->s_proto);
@@ -82,15 +87,21 @@ void serviceInformation(){
         printf("No entry found for this service.\n");
     }
 }
-
+// Methode um Host-Name und IP eines Namens herauszufinden
 void hostName(){
+    // Variable für den Namen der vom Nutzer eingegeben wird
     char name[20];
     printf("Please enter a Name:\n");
+    // Standard Eingabe
     scanf("%s", name);
+    // Structure um die gethostbyname Methode auszuführen und die Rückgabewerte zu speichern
     struct hostent *host = gethostbyname(name);
+    // Abfrage um zu gucken, ob es Infos zum eingegeben Host gibt oder nicht, Ausgabe & Fehler-Meldung
     if (host){
         printf("Official-Host-Name is %s. ", host->h_name);
+        // Schleife um alle IP-Adressen die der Host besitzt anzuzeigen
         for (int i = 0; host->h_addr_list[i] != NULL; i++) {
+            // inet_ntoa übersetzt die IPs in normale Strings
             printf("IP-Address %d: %s\n", i + 1, inet_ntoa(*(struct in_addr*)host->h_addr_list[i]));
         }
     }else{
@@ -98,12 +109,13 @@ void hostName(){
     }
 }
 
-//Menu Code
-int main()
-{
+// Hauptteil des Programms, Verarbeitung und Steuerung der jeweiligen Eingabe
+int main() {
+    // Variable um den Input zu speichern
     int option;
 
     while (1) {
+        // Prints für die verschiedenen verfügbaren Auswahlmöglichkeiten
         printf("Select an option:\n");
         printf("[1] Start the UDP-Client\n");
         printf("[2] Start PCAP-LOG\n");
@@ -111,27 +123,35 @@ int main()
         printf("[4] Get the Host-Name\n");
         printf("[0] To EXIT\n");
 
+        /* If-Abfrage und Eingabe miteinander, um sicherzustellen, dass eine Zahl eingegeben wurde,
+         * gleichzeitig speichert "option" die Eingabe des Nutzers
+         * und falls es keine Zahl war, springt die Schleife zurück and den Anfang */
         if (scanf("%d", &option) != 1) {
             printf("Invalid input. Please enter a number.\n");
-            // Clear the input buffer
+            // Leeren des Input-Puffers, um für neue Eingaben bereit zu sein
             while (getchar() != '\n');
             continue;
         }
-        if(option == 0){
-            exit(EXIT_SUCCESS);
-        }
 
+        // Switch-Case Funktion um die getätigte Auswahl schließlich durchzuführen
         switch (option) {
+            case 0:
+                // Standard Exit-Methode mit Standard Exit-Code 0
+                exit(EXIT_SUCCESS);
             case 1:
+                // Klassischer Methodenaufruf
                 runningChatFunction();
                 break;
             case 2:
+                // Aufruf eines neuen Terminals für das PCAP-Programm
                 system("gnome-terminal -- sudo ./pcapForUDP");
                 break;
             case 3:
+                // Klassischer Methodenaufruf
                 serviceInformation();
                 break;
             case 4:
+                // Klassischer Methodenaufruf
                 hostName();
                 break;
             default:

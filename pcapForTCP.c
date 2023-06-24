@@ -4,18 +4,19 @@
 #include <netinet/tcp.h>
 #include <net/ethernet.h>
 
+// Methode zum Extrahieren der Informationen aus IP und TCP Header
 void parseTcpHeader(const unsigned char* packet) {
-    // Move the packet pointer to the IP header
+    // Verschiebung des Fokus vom "Ethernet Header" auf den "IP Header"
     const struct ip* ipHeader = (struct ip*)(packet + sizeof(struct ether_header));
 
-    //Extract the IP header fields
+    // Extrahierung der beiden IP-Adressen für Quelle und Ziel aus dem IP Header
     unsigned char* sourceIP = inet_ntoa(ipHeader->ip_src);
     unsigned char* destinationIP = inet_ntoa(ipHeader->ip_dst);
 
-    // Move the packet pointer to the TCP header
+    // Verschiebung des Fokus vom "IP Header" auf den "TCP Header"
     const struct tcphdr* tcpHeader = (struct tcphdr*)(packet + sizeof(struct ether_header) + ipHeader->ip_hl * 4);
 
-    // Extract TCP header fields
+    // Extrahierung der Ports, Sequenznummer, Bestätigungsnummer, Header-Länge und Flags
     unsigned int sourcePort = ntohs(tcpHeader->th_sport);
     unsigned int destinationPort = ntohs(tcpHeader->th_dport);
     unsigned int sequenceNumber = ntohl(tcpHeader->th_seq);
@@ -23,7 +24,7 @@ void parseTcpHeader(const unsigned char* packet) {
     unsigned int headerLength = tcpHeader->th_off * 4;
     unsigned int flags = tcpHeader->th_flags;
 
-    // Print the extracted TCP header fields
+    // Ausgabe aller extrahierten Informationen mit einer passenden Beschreibung
     printf("Source Port: %u\n", sourcePort);
     printf("Source IP: %s\n", sourceIP);
     printf("Destination Port: %u\n", destinationPort);
@@ -33,37 +34,41 @@ void parseTcpHeader(const unsigned char* packet) {
     printf("Header Length: %u bytes\n", headerLength);
     printf("Flags: 0x%02X\n", flags);
 
-    // Open the log file in append mode
+    // Erstellen / Öffnen des LOG-Files
     FILE* logFile = fopen("tcpheaders.log", "a");
     if (logFile == NULL) {
         printf("Error opening log file\n");
         return;
     }
 
-    // Write the TCP header information to the log file
+    // Anhängen der extrahierten Informationen mit Beschreibung an das geöffnete LOG-File
     fprintf(logFile, "Source Port: %u\n", sourcePort);
-    fprintf(logFile,"Source IP: %s\n", sourceIP);
+    fprintf(logFile, "Source IP: %s\n", sourceIP);
     fprintf(logFile, "Destination Port: %u\n", destinationPort);
-    fprintf(logFile,"Destination IP: %s\n", destinationIP);
+    fprintf(logFile, "Destination IP: %s\n", destinationIP);
     fprintf(logFile, "Sequence Number: %u\n", sequenceNumber);
     fprintf(logFile, "Acknowledgment Number: %u\n", acknowledgmentNumber);
     fprintf(logFile, "Header Length: %u bytes\n", headerLength);
     fprintf(logFile, "Flags: 0x%02X\n", flags);
 
-    // Close the log file
+    // Schließen des LOG-Files
     fclose(logFile);
 }
 
+// Methode zum Bestätigen des Einfangens eines Pakets und Weitergabe des Pakets zur Extrahier-Methode
 void packetHandler(unsigned char* userData, const struct pcap_pkthdr* pkthdr, const unsigned char* packet) {
     printf("---------------\nPacket captured\n--------------\n");
     parseTcpHeader(packet);
 }
 
+// Main Methode zum Erstellen eines PCAP-Geräts, um Netzwerk-Kommunikation mitzuschneiden
 int main() {
+    // Benötigte Variable zum Speichern und Weitergeben aller Informationen (Das PCAP-Gerät)
     pcap_t* handle;
+    // Benötigter Error-Puffer im Falle eines Fehlers
     char errbuf[PCAP_ERRBUF_SIZE];
 
-    // Open network interface for capturing packets
+    // Öffnen des Netzwerk-Interfaces mit Erfolg- und Fehler-Meldung
     handle = pcap_open_live("lo", BUFSIZ, 1, 1000, errbuf);
     if (handle == NULL) {
         printf("Error opening device: %s\n", errbuf);
@@ -71,29 +76,30 @@ int main() {
     }else
         printf("Success opening device...\n");
 
-    // Set a filter
+    // Einstellen des Filters auf das gewünschte Protokoll
     struct bpf_program fp;
     char filter_exp[] = "tcp";
     bpf_u_int32 subnet_mask, ip;
 
-    // Compiling the filter to check existence
+    // Kompilieren des Filters, zur Überprüfung ob der Filter existiert mit möglicher Fehler-Anzeige
     if (pcap_compile(handle, &fp, filter_exp, 0, ip) == -1) {
         printf("Error compiling filter expression: %s\n", pcap_geterr(handle));
         return 1;
     }
 
-    // Setting the filter only to TCP-Packets
+    // Finales Einstellen des Filters mit Erfolg- und Fehler-Meldung
     if (pcap_setfilter(handle, &fp) == -1) {
         printf("Error setting filter: %s\n", pcap_geterr(handle));
         return 1;
     }else
         printf("Success setting filter...\n");
+    // Finale Aktivierungsnachricht
     printf("TCP-Packet capturing is active...\n");
 
-    // Start capturing packets
+    // Methode zum eigentlichen Einfangen der Pakete
     pcap_loop(handle, 0, packetHandler, NULL);
 
-    // Close the pcap handle
+    // Schließen des PCAP Geräts
     pcap_close(handle);
 
     return 0;
