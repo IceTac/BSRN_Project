@@ -1,0 +1,135 @@
+Timestamp: 9:22:29 25-6-2023
+Source Port: 33512
+Source IP: 127.0.0.1
+Destination Port: 8080
+Destination IP: 127.0.0.1
+Sequence Number: 838085001
+Acknowledgment Number: 0
+Header Length: 40 bytes
+Flags: 0x02
+Timestamp: 9:22:29 25-6-2023
+Source Port: 8080
+Source IP: 127.0.0.1
+Destination Port: 33512
+Destination IP: 127.0.0.1
+Sequence Number: 3034642058
+Acknowledgment Number: 838085002
+Header Length: 40 bytes
+Flags: 0x12
+Timestamp: 9:22:29 25-6-2023
+Source Port: 33512
+Source IP: 127.0.0.1
+Destination Port: 8080
+Destination IP: 127.0.0.1
+Sequence Number: 838085002
+Acknowledgment Number: 3034642059
+Header Length: 32 bytes
+Flags: 0x10
+Timestamp: 9:22:32 25-6-2023
+Source Port: 33512
+Source IP: 127.0.0.1
+Destination Port: 8080
+Destination IP: 127.0.0.1
+Sequence Number: 838085002
+Acknowledgment Number: 3034642059
+Header Length: 32 bytes
+Flags: 0x18
+Timestamp: 9:22:32 25-6-2023
+Source Port: 8080
+Source IP: 127.0.0.1
+Destination Port: 33512
+Destination IP: 127.0.0.1
+Sequence Number: 3034642059
+Acknowledgment Number: 838085082
+Header Length: 32 bytes
+Flags: 0x10
+Timestamp: 9:22:35 25-6-2023
+Source Port: 8080
+Source IP: 127.0.0.1
+Destination Port: 33512
+Destination IP: 127.0.0.1
+Sequence Number: 3034642059
+Acknowledgment Number: 838085082
+Header Length: 32 bytes
+Flags: 0x18
+Timestamp: 9:22:35 25-6-2023
+Source Port: 33512
+Source IP: 127.0.0.1
+Destination Port: 8080
+Destination IP: 127.0.0.1
+Sequence Number: 838085082
+Acknowledgment Number: 3034642139
+Header Length: 32 bytes
+Flags: 0x10
+Timestamp: 9:22:37 25-6-2023
+Source Port: 33512
+Source IP: 127.0.0.1
+Destination Port: 8080
+Destination IP: 127.0.0.1
+Sequence Number: 838085082
+Acknowledgment Number: 3034642139
+Header Length: 32 bytes
+Flags: 0x18
+Timestamp: 9:22:37 25-6-2023
+Source Port: 8080
+Source IP: 127.0.0.1
+Destination Port: 33512
+Destination IP: 127.0.0.1
+Sequence Number: 3034642139
+Acknowledgment Number: 838085162
+Header Length: 32 bytes
+Flags: 0x10
+Timestamp: 9:22:39 25-6-2023
+Source Port: 8080
+Source IP: 127.0.0.1
+Destination Port: 33512
+Destination IP: 127.0.0.1
+Sequence Number: 3034642139
+Acknowledgment Number: 838085162
+Header Length: 32 bytes
+Flags: 0x18
+Timestamp: 9:22:39 25-6-2023
+Source Port: 33512
+Source IP: 127.0.0.1
+Destination Port: 8080
+Destination IP: 127.0.0.1
+Sequence Number: 838085162
+Acknowledgment Number: 3034642219
+Header Length: 32 bytes
+Flags: 0x10
+Timestamp: 9:22:39 25-6-2023
+Source Port: 8080
+Source IP: 127.0.0.1
+Destination Port: 33512
+Destination IP: 127.0.0.1
+Sequence Number: 3034642219
+Acknowledgment Number: 838085162
+Header Length: 32 bytes
+Flags: 0x11
+Timestamp: 9:22:39 25-6-2023
+Source Port: 33512
+Source IP: 127.0.0.1
+Destination Port: 8080
+Destination IP: 127.0.0.1
+Sequence Number: 838085162
+Acknowledgment Number: 3034642219
+Header Length: 32 bytes
+Flags: 0x11
+Timestamp: 9:22:39 25-6-2023
+Source Port: 8080
+Source IP: 127.0.0.1
+Destination Port: 33512
+Destination IP: 127.0.0.1
+Sequence Number: 3034642220
+Acknowledgment Number: 838085163
+Header Length: 32 bytes
+Flags: 0x10
+Timestamp: 9:22:39 25-6-2023
+Source Port: 33512
+Source IP: 127.0.0.1
+Destination Port: 8080
+Destination IP: 127.0.0.1
+Sequence Number: 838085163
+Acknowledgment Number: 3034642220
+Header Length: 32 bytes
+Flags: 0x10

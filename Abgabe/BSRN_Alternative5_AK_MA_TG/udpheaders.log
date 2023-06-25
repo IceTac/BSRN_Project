@@ -1,0 +1,72 @@
+Timestamp: 9:25:35 25-6-2023
+Source Port: 45320
+Source IP: 127.0.0.1
+Destination Port: 5000
+Destination IP: 127.0.0.1
+Length: 88 bytes
+Checksum: 0xFE6B
+
+Timestamp: 9:25:35 25-6-2023
+Source Port: 5000
+Source IP: 127.0.0.1
+Destination Port: 45320
+Destination IP: 127.0.0.1
+Length: 88 bytes
+Checksum: 0xFE6B
+
+Timestamp: 9:25:41 25-6-2023
+Source Port: 45320
+Source IP: 127.0.0.1
+Destination Port: 5000
+Destination IP: 127.0.0.1
+Length: 88 bytes
+Checksum: 0xFE6B
+
+Timestamp: 9:25:41 25-6-2023
+Source Port: 5000
+Source IP: 127.0.0.1
+Destination Port: 45320
+Destination IP: 127.0.0.1
+Length: 88 bytes
+Checksum: 0xFE6B
+
+Timestamp: 9:25:44 25-6-2023
+Source Port: 45320
+Source IP: 127.0.0.1
+Destination Port: 5000
+Destination IP: 127.0.0.1
+Length: 88 bytes
+Checksum: 0xFE6B
+
+Timestamp: 9:25:44 25-6-2023
+Source Port: 5000
+Source IP: 127.0.0.1
+Destination Port: 45320
+Destination IP: 127.0.0.1
+Length: 88 bytes
+Checksum: 0xFE6B
+
+Timestamp: 9:25:46 25-6-2023
+Source Port: 45320
+Source IP: 127.0.0.1
+Destination Port: 5000
+Destination IP: 127.0.0.1
+Length: 88 bytes
+Checksum: 0xFE6B
+
+Timestamp: 9:25:46 25-6-2023
+Source Port: 5000
+Source IP: 127.0.0.1
+Destination Port: 45320
+Destination IP: 127.0.0.1
+Length: 88 bytes
+Checksum: 0xFE6B
+
+Timestamp: 9:25:49 25-6-2023
+Source Port: 45320
+Source IP: 127.0.0.1
+Destination Port: 5000
+Destination IP: 127.0.0.1
+Length: 88 bytes
+Checksum: 0xFE6B
+
