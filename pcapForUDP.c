@@ -3,6 +3,7 @@
 #include <netinet/ip.h>
 #include <netinet/udp.h>
 #include <net/ethernet.h>
+#include <time.h>
 
 // Methode zum Extrahieren der Informationen aus IP und TCP Header
 void parseUdpHeader(const unsigned char* packet) {
@@ -37,7 +38,14 @@ void parseUdpHeader(const unsigned char* packet) {
         return;
     }
 
+    // Datum und Zeit herausfinden
+    time_t t;
+    t = time(NULL);
+    struct tm tm;
+    tm = *localtime(&t);
+
     // Anhängen der extrahierten Informationen mit Beschreibung an das geöffnete LOG-File
+    fprintf(logFile, "Timestamp: %d:%d:%d %d-%d-%d\n", tm.tm_hour, tm.tm_min, tm.tm_sec, tm.tm_mday, tm.tm_mon+1, tm.tm_year+1900);
     fprintf(logFile, "Source Port: %u\n", sourcePort);
     fprintf(logFile, "Source IP: %s\n", sourceIP);
     fprintf(logFile, "Destination Port: %u\n", destinationPort);
