@@ -5,7 +5,7 @@
 #include <net/ethernet.h>
 #include <time.h>
 
-// Methode zum Extrahieren der Informationen aus IP und TCP Header
+// Methode zum Extrahieren der Informationen aus IP und UDP Header
 void parseUdpHeader(const unsigned char* packet) {
     // Verschiebung des Fokus vom "Ethernet Header" auf den "IP Header"
     const struct ip* ipHeader = (struct ip*)(packet + sizeof(struct ether_header));
