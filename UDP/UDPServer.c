@@ -41,14 +41,14 @@ int main(){
 
     // Endlos-Schleife, die nur bei Bedingungen abbricht, damit Chat endlos weitergehen kann
     for(;;) {
-        //receive the datagram !!!!!!!!
-        //length = sizeof(clientAddress);
+        // Speichern der Länge der Client-Adresse
+        length = sizeof(clientAddress);
 
         // Leeren des Puffers
         bzero(buff, MAX);
 
         // Empfangen der Nachricht vom Client, mit allen nötigen Informationen
-        recvfrom(socketFileHandle, buff, sizeof(buff), 0, (struct sockaddr *) &clientAddress, sizeof(&clientAddress));
+        recvfrom(socketFileHandle, buff, sizeof(buff), 0, (struct sockaddr *) &clientAddress, &length);
         /* Abfrage ob der Puffer nur aus dem Wort "exit" besteht,
          * mit der Methode "strncmp" welche 2 Strings vergleicht,
          * falls ja, dann wird die Schleife unterbrochen und die chatFunction Methode endet */
@@ -56,8 +56,6 @@ int main(){
             printf("Server Exit...\n");
             break;
         }
-
-        //buff[n] = '\0';
 
         // Ausgabe des Puffers
         printf("From Client: %s", buff);

@@ -53,13 +53,12 @@ void chatFunction(int connectionFileHandle){
 int main(){
     // Variablen zum Speichern der wichtigen Informationen des Sockets und der Connection
     int socketFileHandle, connectionFileHandle;
-    // int length;
-    // Strucutres für die Server Adresse und die Client Infos
+    // Structures für die Server Adresse und die Client-Infos
     struct sockaddr_in serverAddress, client;
     //Leeren der Server Adresse
     bzero(&serverAddress, sizeof(serverAddress));
 
-    // // Erstellen des Sockets, in diesem Fall TCP & Erfolg-/Fehler-Meldung
+    // Erstellen des Sockets, in diesem Fall TCP & Erfolg-/Fehler-Meldung
     socketFileHandle = socket(AF_INET, SOCK_STREAM, 0);
     if (socketFileHandle == -1) {
         printf("socket creation failed...\n");
@@ -90,10 +89,11 @@ int main(){
     else {
         printf("Server listening..\n");
     }
-    //length = sizeof(client); !!!!!!
+    // Speichern der Länge der Client-Adresse
+    int length = sizeof(client);
 
     // Akzeptieren der Verbindungsanfrage des Clients mit accept und speichern der Verbindungsinfos im connectionFileHandle
-    connectionFileHandle = accept(socketFileHandle, (SA*)&client, sizeof(&client));
+    connectionFileHandle = accept(socketFileHandle, (SA*)&client, &length);
     // Erfolg-/FehlerMeldung
     if (connectionFileHandle < 0) {
         printf("server accept failed...\n");

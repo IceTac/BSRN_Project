@@ -1,0 +1,208 @@
+Source Port: 45956
+Source IP: 127.0.0.1
+Destination Port: 8080
+Destination IP: 127.0.0.1
+Sequence Number: 2458530936
+Acknowledgment Number: 0
+Header Length: 40 bytes
+Flags: 0x02
+Source Port: 8080
+Source IP: 127.0.0.1
+Destination Port: 45956
+Destination IP: 127.0.0.1
+Sequence Number: 1115403515
+Acknowledgment Number: 2458530937
+Header Length: 40 bytes
+Flags: 0x12
+Source Port: 45956
+Source IP: 127.0.0.1
+Destination Port: 8080
+Destination IP: 127.0.0.1
+Sequence Number: 2458530937
+Acknowledgment Number: 1115403516
+Header Length: 32 bytes
+Flags: 0x10
+Source Port: 45956
+Source IP: 127.0.0.1
+Destination Port: 8080
+Destination IP: 127.0.0.1
+Sequence Number: 2458530937
+Acknowledgment Number: 1115403516
+Header Length: 32 bytes
+Flags: 0x18
+Source Port: 8080
+Source IP: 127.0.0.1
+Destination Port: 45956
+Destination IP: 127.0.0.1
+Sequence Number: 1115403516
+Acknowledgment Number: 2458531017
+Header Length: 32 bytes
+Flags: 0x10
+Source Port: 8080
+Source IP: 127.0.0.1
+Destination Port: 45956
+Destination IP: 127.0.0.1
+Sequence Number: 1115403516
+Acknowledgment Number: 2458531017
+Header Length: 32 bytes
+Flags: 0x18
+Source Port: 45956
+Source IP: 127.0.0.1
+Destination Port: 8080
+Destination IP: 127.0.0.1
+Sequence Number: 2458531017
+Acknowledgment Number: 1115403596
+Header Length: 32 bytes
+Flags: 0x10
+Source Port: 45956
+Source IP: 127.0.0.1
+Destination Port: 8080
+Destination IP: 127.0.0.1
+Sequence Number: 2458531017
+Acknowledgment Number: 1115403596
+Header Length: 32 bytes
+Flags: 0x18
+Source Port: 8080
+Source IP: 127.0.0.1
+Destination Port: 45956
+Destination IP: 127.0.0.1
+Sequence Number: 1115403596
+Acknowledgment Number: 2458531097
+Header Length: 32 bytes
+Flags: 0x10
+Source Port: 45956
+Source IP: 127.0.0.1
+Destination Port: 8080
+Destination IP: 127.0.0.1
+Sequence Number: 2458531097
+Acknowledgment Number: 1115403596
+Header Length: 32 bytes
+Flags: 0x11
+Source Port: 8080
+Source IP: 127.0.0.1
+Destination Port: 45956
+Destination IP: 127.0.0.1
+Sequence Number: 1115403596
+Acknowledgment Number: 2458531098
+Header Length: 32 bytes
+Flags: 0x10
+Source Port: 8080
+Source IP: 127.0.0.1
+Destination Port: 45956
+Destination IP: 127.0.0.1
+Sequence Number: 1115403596
+Acknowledgment Number: 2458531098
+Header Length: 32 bytes
+Flags: 0x18
+Source Port: 45956
+Source IP: 127.0.0.1
+Destination Port: 8080
+Destination IP: 127.0.0.1
+Sequence Number: 2458531098
+Acknowledgment Number: 0
+Header Length: 20 bytes
+Flags: 0x04
+Source Port: 45800
+Source IP: 127.0.0.1
+Destination Port: 8080
+Destination IP: 127.0.0.1
+Sequence Number: 1504572800
+Acknowledgment Number: 0
+Header Length: 40 bytes
+Flags: 0x02
+Source Port: 8080
+Source IP: 127.0.0.1
+Destination Port: 45800
+Destination IP: 127.0.0.1
+Sequence Number: 4197380964
+Acknowledgment Number: 1504572801
+Header Length: 40 bytes
+Flags: 0x12
+Source Port: 45800
+Source IP: 127.0.0.1
+Destination Port: 8080
+Destination IP: 127.0.0.1
+Sequence Number: 1504572801
+Acknowledgment Number: 4197380965
+Header Length: 32 bytes
+Flags: 0x10
+Source Port: 45800
+Source IP: 127.0.0.1
+Destination Port: 8080
+Destination IP: 127.0.0.1
+Sequence Number: 1504572801
+Acknowledgment Number: 4197380965
+Header Length: 32 bytes
+Flags: 0x18
+Source Port: 8080
+Source IP: 127.0.0.1
+Destination Port: 45800
+Destination IP: 127.0.0.1
+Sequence Number: 4197380965
+Acknowledgment Number: 1504572881
+Header Length: 32 bytes
+Flags: 0x10
+Source Port: 8080
+Source IP: 127.0.0.1
+Destination Port: 45800
+Destination IP: 127.0.0.1
+Sequence Number: 4197380965
+Acknowledgment Number: 1504572881
+Header Length: 32 bytes
+Flags: 0x18
+Source Port: 45800
+Source IP: 127.0.0.1
+Destination Port: 8080
+Destination IP: 127.0.0.1
+Sequence Number: 1504572881
+Acknowledgment Number: 4197381045
+Header Length: 32 bytes
+Flags: 0x10
+Source Port: 45800
+Source IP: 127.0.0.1
+Destination Port: 8080
+Destination IP: 127.0.0.1
+Sequence Number: 1504572881
+Acknowledgment Number: 4197381045
+Header Length: 32 bytes
+Flags: 0x18
+Source Port: 8080
+Source IP: 127.0.0.1
+Destination Port: 45800
+Destination IP: 127.0.0.1
+Sequence Number: 4197381045
+Acknowledgment Number: 1504572961
+Header Length: 32 bytes
+Flags: 0x10
+Source Port: 45800
+Source IP: 127.0.0.1
+Destination Port: 8080
+Destination IP: 127.0.0.1
+Sequence Number: 1504572961
+Acknowledgment Number: 4197381045
+Header Length: 32 bytes
+Flags: 0x11
+Source Port: 8080
+Source IP: 127.0.0.1
+Destination Port: 45800
+Destination IP: 127.0.0.1
+Sequence Number: 4197381045
+Acknowledgment Number: 1504572962
+Header Length: 32 bytes
+Flags: 0x10
+Source Port: 8080
+Source IP: 127.0.0.1
+Destination Port: 45800
+Destination IP: 127.0.0.1
+Sequence Number: 4197381045
+Acknowledgment Number: 1504572962
+Header Length: 32 bytes
+Flags: 0x18
+Source Port: 45800
+Source IP: 127.0.0.1
+Destination Port: 8080
+Destination IP: 127.0.0.1
+Sequence Number: 1504572962
+Acknowledgment Number: 0
+Header Length: 20 bytes
+Flags: 0x04
