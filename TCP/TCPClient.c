@@ -21,7 +21,7 @@ void chatFunction(int socketFileHandle){
 
     // Zähler Variable tmp, später nur wichtig für die Eingabe in den Puffer
     int tmp;
-    // Endlos-Schleife, die nur bei Bedinugnen abbricht, damit Chat endlos weitergehen kann
+    // Endlos-Schleife, die nur bei Bedingungen abbricht, damit Chat endlos weitergehen kann
     for (;;) {
         // Pro Durchang wird tmp auf 0 gesetzt
         tmp = 0;
@@ -33,11 +33,11 @@ void chatFunction(int socketFileHandle){
         // Eingabe-Schleife, jedes Zeichen wird in den Puffer geschrieben bis 'Enter/Eingabetaste' gedrückt wird
         while ((buff[tmp++] = getchar()) != '\n');
 
-        // Methode zum Schreiben an den Server
+        // Methode zum Schreiben an den Server und Speichern im Puffer
         write(socketFileHandle, buff, sizeof(buff));
         /* Abfrage ob der Puffer nur aus dem Wort "exit" besteht,
          * mit der Methode "strncmp" welche 2 Strings vergleicht,
-         * falls ja dann wird die Schleife unterbrochen und die chatFunction Methode endet */
+         * falls ja, dann wird die Schleife unterbrochen und die chatFunction Methode endet */
         if ((strncmp(buff, "exit", 4)) == 0) {
             printf("Client Exit...\n");
             break;
@@ -45,8 +45,9 @@ void chatFunction(int socketFileHandle){
         // Methode zum Entleeren des Puffers
         bzero(buff, MAX);
 
-        // Methode zum Lesen vom Server
+        // Methode zum Lesen vom Server und Speichern im Puffer
         read(socketFileHandle, buff, sizeof(buff));
+        // Ausgabe der Nachricht (des Puffers)
         printf("From Server : %s\t", buff);
         // Abfrage ob exit das Wort im Puffer ist ... (s.o.)
         if ((strncmp(buff, "exit", 4)) == 0) {
@@ -60,11 +61,11 @@ void creatingConnection(){
     // Der Socket-Datei-Verarbeiter (Hauptspeicher Variable des Sockets)
     int socketFileHandle;
     // Eine Structure für die Server Adresse
-    struct sockaddr_in serverAdress;
+    struct sockaddr_in serverAddress;
     //Leeren der Server Adresse, da selbst eine IP festgelegt wird
-    bzero(&serverAdress, sizeof(serverAdress));
+    bzero(&serverAddress, sizeof(serverAddress));
 
-    // Erstellen des Sockets mit dem default Protokoll, in diesem Fall TCP & Erfolg-/Fehler-Meldung
+    // Erstellen des Sockets, in diesem Fall TCP & Erfolg-/Fehler-Meldung
     socketFileHandle = socket(AF_INET, SOCK_STREAM, 0);
     if (socketFileHandle == -1) {
         printf("socket creation failed...\n");
@@ -76,20 +77,20 @@ void creatingConnection(){
 
     // Eingabe der IP-Adresse vom Nutzer
     // Variable für die IP-Adresse
-    char ipAdress[20];
+    char ipAddress[20];
     printf("Please enter an IP-Adress:\n");
     // Standard Eingabe durch scanf
-    scanf("%s", ipAdress);
+    scanf("%s", ipAddress);
     //Leeren des Input-Puffers für kommende Eingaben im Chat-Bereich
     while (getchar() != '\n');
 
     // Zuteilung von IP-Adresse und Port
-    serverAdress.sin_family = AF_INET;
-    serverAdress.sin_addr.s_addr = inet_addr(ipAdress);
-    serverAdress.sin_port = htons(PORT);
+    serverAddress.sin_family = AF_INET;
+    serverAddress.sin_addr.s_addr = inet_addr(ipAddress);
+    serverAddress.sin_port = htons(PORT);
 
     // Verbindung mit dem Server durch connect, dem socketFileHandle, der Server Adresse und Socket Adresse (SA) & Erfolg-/Fehler-Meldung
-    if (connect(socketFileHandle, (SA*)&serverAdress, sizeof(serverAdress)) != 0) {
+    if (connect(socketFileHandle, (SA*)&serverAddress, sizeof(serverAddress)) != 0) {
         printf("connection with the server failed...\n");
         exit(0);
     }
@@ -130,7 +131,7 @@ void hostName(){
     scanf("%s", name);
     // Structure um die gethostbyname Methode auszuführen und die Rückgabewerte zu speichern
     struct hostent *host = gethostbyname(name);
-    // Abfrage um zu gucken, ob es Infos zum eingegeben Host gibt oder nicht, Ausgabe & Fehler-Meldung
+    // Abfrage um zu gucken, ob es Infos zum eingegebenen Host gibt oder nicht, Ausgabe & Fehler-Meldung
     if (host){
         printf("Official-Host-Name is %s. ", host->h_name);
         // Schleife um alle IP-Adressen die der Host besitzt anzuzeigen
@@ -148,6 +149,7 @@ int main() {
     // Variable um den Input zu speichern
     int option;
 
+    // Unendliche Schleife, damit das Menü nur per Exit-Option verlassen werden kann
     while (1) {
         // Prints für die verschiedenen verfügbaren Auswahlmöglichkeiten
         printf("Select an option:\n");

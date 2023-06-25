@@ -8,66 +8,83 @@
 #include <stdlib.h>
 #include <netdb.h>
 
+// Festlegung des Ports
 #define PORT 5000
+// Festlegung der maximalen Zeichen-Anzahl pro Nachricht
 #define MAX 80
 
-void runningChatFunction()
-{
-    char buffer[100];
-    int sockfd, n;
-    struct sockaddr_in servaddr;
+// Methode zum Erstellen und laufen lassen des Clients
+void runningChatFunction(){
+    // Erstellung eines Puffers der Größe 80 (s.o.)
+    char buff[MAX];
+    // Der Socket-Datei-Verarbeiter (Hauptspeicher Variable des Sockets)
+    int socketFileHandle;
+    // Eine Structure für die Server Adresse
+    struct sockaddr_in serverAddress;
 
-    // clear servaddr
-    bzero(&servaddr, sizeof(servaddr));
+    // Die Structure der Server Adresse wird geleert
+    bzero(&serverAddress, sizeof(serverAddress));
 
-    //Get the IP-Adress from user
-    char ipAdress[20];
+    // Eingabe der IP-Adresse vom Nutzer
+    // Variable für die IP-Adresse
+    char ipAddress[20];
     printf("Please enter an IP-Adress:\n");
-    scanf("%s", ipAdress);
+    // Standard Eingabe durch scanf
+    scanf("%s", ipAddress);
+    //Leeren des Input-Puffers für kommende Eingaben im Chat-Bereich
     while (getchar() != '\n');
 
-    //Assigning Port and IP-Adress
-    servaddr.sin_addr.s_addr = inet_addr(ipAdress);
-    servaddr.sin_port = htons(PORT);
-    servaddr.sin_family = AF_INET;
+    // Zuteilung von IP-Adresse und Port
+    serverAddress.sin_addr.s_addr = inet_addr(ipAddress);
+    serverAddress.sin_port = htons(PORT);
+    serverAddress.sin_family = AF_INET;
 
-    // create datagram socket
-    sockfd = socket(AF_INET, SOCK_DGRAM, 0);
-    printf("Creating Socket...\n");
-
-    // connect to server
-    if(connect(sockfd, (struct sockaddr *)&servaddr, sizeof(servaddr)) < 0)
-    {
-        printf("\n Error : Connect Failed \n");
+    // Erstellen des Sockets, in diesem Fall UDP & Erfolg-/Fehler-Meldung
+    socketFileHandle = socket(AF_INET, SOCK_DGRAM, 0);
+    if (socketFileHandle == -1) {
+        printf("socket creation failed...\n");
         exit(0);
-    }else{
+    }
+    else
+        printf("Socket successfully created..\n");
+
+    // Verbindung mit dem Server durch connect, dem socketFileHandle, der Server Adresse und Socket Adresse & Erfolg-/Fehler-Meldung
+    if(connect(socketFileHandle, (struct sockaddr *)&serverAddress, sizeof(serverAddress)) < 0){
+        printf("Error: Connect Failed \n");
+        exit(0);
+    }else
         printf("Connection with Server successful\n");
-    }
 
+    // Endlos-Schleife, die nur bei Bedingungen abbricht, damit Chat endlos weitergehen kann
     for(;;) {
-        int x = 0;
+        // Zähler Variable tmp, später nur wichtig für die Eingabe in den Puffer, wird pro Durchgang auf 0 gesetzt
+        int tmp = 0;
 
-        // request to send datagram
-        // no need to specify server address in sendto
-        // connect stores the peers IP and port
+        // Leeren des Puffers
+        bzero(buff, MAX);
+
         printf("To Server: ");
-        while ((buffer[x++] = getchar()) != '\n');
-        sendto(sockfd, buffer, MAX, 0, (struct sockaddr *) NULL, sizeof(servaddr));
-        if ((strncmp(buffer, "exit", 4)) == 0) {
+        // Eingabe-Schleife, jedes Zeichen wird in den Puffer geschrieben bis 'Enter/Eingabetaste' gedrückt wird
+        while ((buff[tmp++] = getchar()) != '\n');
+        // Senden der Nachricht an den Server
+        sendto(socketFileHandle, buff, MAX, 0, (struct sockaddr *) NULL, sizeof(serverAddress));
+        /* Abfrage ob der Puffer nur aus dem Wort "exit" besteht,
+         * mit der Methode "strncmp" welche 2 Strings vergleicht,
+         * falls ja, dann wird die Schleife unterbrochen und die chatFunction Methode endet */
+        if ((strncmp(buff, "exit", 4)) == 0) {
             printf("Client Exit...\n");
             break;
         }
 
-        // waiting for response
-        recvfrom(sockfd, buffer, sizeof(buffer), 0, (struct sockaddr *) NULL, NULL);
-        printf("From Server: %s\n", buffer);
-        if ((strncmp(buffer, "exit", 4)) == 0) {
-            printf("Client Exit...\n");
-            break;
-        }
+        // Leeren des Puffers
+        bzero(buff, MAX);
+
+        // Empfangen der Nachricht des Servers
+        recvfrom(socketFileHandle, buff, sizeof(buff), 0, (struct sockaddr *) NULL, NULL);
+        printf("From Server: %s\n", buff);
     }
-    // close the descriptor
-    close(sockfd);
+    // Schließen des Sockets
+    close(socketFileHandle);
 }
 
 // Methode um Name, Port und Protokoll eines Services herauszufinden
@@ -96,7 +113,7 @@ void hostName(){
     scanf("%s", name);
     // Structure um die gethostbyname Methode auszuführen und die Rückgabewerte zu speichern
     struct hostent *host = gethostbyname(name);
-    // Abfrage um zu gucken, ob es Infos zum eingegeben Host gibt oder nicht, Ausgabe & Fehler-Meldung
+    // Abfrage um zu gucken, ob es Infos zum eingegebenen Host gibt oder nicht, Ausgabe & Fehler-Meldung
     if (host){
         printf("Official-Host-Name is %s. ", host->h_name);
         // Schleife um alle IP-Adressen die der Host besitzt anzuzeigen
@@ -114,6 +131,7 @@ int main() {
     // Variable um den Input zu speichern
     int option;
 
+    // Unendliche Schleife, damit das Menü nur per Exit-Option verlassen werden kann
     while (1) {
         // Prints für die verschiedenen verfügbaren Auswahlmöglichkeiten
         printf("Select an option:\n");

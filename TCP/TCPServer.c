@@ -5,64 +5,76 @@
 #include <sys/socket.h>
 #include <unistd.h> // read(), write(), close()
 
+// Festlegung der maximalen Zeichen-Anzahl pro Nachricht
 #define MAX 80
+// Festlegung des Ports
 #define PORT 8080
+// Festlegung des Kürzels SA (Socket Adress) für die Structure sockaddr [Nur für Convenience]
 #define SA struct sockaddr
 
-// Function designed for chat between client and server.
-void chatFunction(int connfd)
-{
+// Methode welche den File Handle von der Connection als Parameter für read() und write() benutzt
+void chatFunction(int connectionFileHandle){
+    // Erstellung eines Puffers der Größe 80 (s.o.)
     char buff[MAX];
-    int n;
-    // infinite loop for chat
+
+    // Zähler Variable tmp, später nur wichtig für die Eingabe in den Puffer
+    int tmp;
+    // Endlos-Schleife, die nur bei Bedingungen abbricht, damit Chat endlos weitergehen kann
     for (;;) {
+        // Pro Durchang wird tmp auf 0 gesetzt
+        tmp = 0;
+        // Methode zum Entleeren des Puffers (für fehlerfreie, dopplungsfreie Übertragung wichtig)
         bzero(buff, MAX);
 
-        // read the message from client and copy it in buffer
-        read(connfd, buff, sizeof(buff));
+        // Methode zum Lesen vom Client und Speichern im Puffer
+        read(connectionFileHandle, buff, sizeof(buff));
 
-        // print buffer which contains the client contents
+        // Ausgabe der Nachricht vom Client (Puffer print)
         printf("From client: %s\t To client : ", buff);
+        // Methode zum Entleeren des Puffers
         bzero(buff, MAX);
-        n = 0;
-        // copy server message in the buffer
-        while ((buff[n++] = getchar()) != '\n');
+        // Eingabe-Schleife, jedes Zeichen wird in den Puffer geschrieben bis 'Enter/Eingabetaste' gedrückt wird
+        while ((buff[tmp++] = getchar()) != '\n');
 
-        // and send that buffer to client
-        write(connfd, buff, sizeof(buff));
+        // Methode zum Schreiben an den Client und Speichern im Puffer
+        write(connectionFileHandle, buff, sizeof(buff));
 
-        // if msg contains "Exit" then server exit and chat ended.
-        if (strncmp("exit", buff, 4) == 0) {
+        /* Abfrage ob der Puffer nur aus dem Wort "exit" besteht,
+         * mit der Methode "strncmp" welche 2 Strings vergleicht,
+         * falls ja, dann wird die Schleife unterbrochen und die chatFunction Methode endet */
+        if (strncmp(buff, "exit", 4) == 0) {
             printf("Server Exit...\n");
             break;
         }
     }
 }
 
-// Driver function
-int main()
-{
-    int sockfd, connfd, len;
-    struct sockaddr_in servaddr, cli;
+// Methode zum Erstellen des Server Sockets, sowie einer Verbindung
+int main(){
+    // Variablen zum Speichern der wichtigen Informationen des Sockets und der Connection
+    int socketFileHandle, connectionFileHandle;
+    // int length;
+    // Strucutres für die Server Adresse und die Client Infos
+    struct sockaddr_in serverAddress, client;
+    //Leeren der Server Adresse
+    bzero(&serverAddress, sizeof(serverAddress));
 
-    // socket create and verification
-    sockfd = socket(AF_INET, SOCK_STREAM, 0);
-    if (sockfd == -1) {
+    // // Erstellen des Sockets, in diesem Fall TCP & Erfolg-/Fehler-Meldung
+    socketFileHandle = socket(AF_INET, SOCK_STREAM, 0);
+    if (socketFileHandle == -1) {
         printf("socket creation failed...\n");
         exit(0);
     }
-    else {
+    else
         printf("Socket successfully created..\n");
-    }
-    bzero(&servaddr, sizeof(servaddr));
 
-    // assign IP, PORT
-    servaddr.sin_family = AF_INET;
-    servaddr.sin_addr.s_addr = htonl(INADDR_ANY);
-    servaddr.sin_port = htons(PORT);
+    // Zuteilung von IP-Adresse und Port
+    serverAddress.sin_family = AF_INET;
+    serverAddress.sin_addr.s_addr = htonl(INADDR_ANY);
+    serverAddress.sin_port = htons(PORT);
 
-    // Binding newly created socket to given IP and verification
-    if ((bind(sockfd, (SA*)&servaddr, sizeof(servaddr))) != 0) {
+    // Binden des Sockets an die IP-Adresse & Erfolg-/FehlerMeldung
+    if ((bind(socketFileHandle, (SA*)&serverAddress, sizeof(serverAddress))) != 0) {
         printf("socket bind failed...\n");
         exit(0);
     }
@@ -70,28 +82,29 @@ int main()
         printf("Socket successfully binded..\n");
     }
 
-    // Now server is ready to listen and verification
-    if ((listen(sockfd, 5)) != 0) {
+    // listen öffnet den Server für alle Verbindungsanfragen, sodass der Client den Server finden kann & Erfolg-/FehlerMeldung
+    if ((listen(socketFileHandle, 5)) != 0) {
         printf("Listen failed...\n");
         exit(0);
     }
     else {
         printf("Server listening..\n");
     }
-    len = sizeof(cli);
+    //length = sizeof(client); !!!!!!
 
-    // Accept the data packet from client and verification
-    connfd = accept(sockfd, (SA*)&cli, &len);
-    if (connfd < 0) {
+    // Akzeptieren der Verbindungsanfrage des Clients mit accept und speichern der Verbindungsinfos im connectionFileHandle
+    connectionFileHandle = accept(socketFileHandle, (SA*)&client, sizeof(&client));
+    // Erfolg-/FehlerMeldung
+    if (connectionFileHandle < 0) {
         printf("server accept failed...\n");
         exit(0);
     }
     else
         printf("server accept the client...\n");
 
-    // Function for chatting between client and server
-    chatFunction(connfd);
+    // Aufruf der Chat Methode (s.o.)
+    chatFunction(connectionFileHandle);
 
-    // After chatting close the socket
-    close(sockfd);
+    // Schließen des Sockets
+    close(socketFileHandle);
 }
