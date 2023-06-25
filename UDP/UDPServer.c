@@ -37,7 +37,12 @@ int main(){
     serverAddress.sin_family = AF_INET;
 
     // Schreiben der Server Adresse in die Socket Beschreibung
-    bind(socketFileHandle, (struct sockaddr*)&serverAddress, sizeof(serverAddress));
+    if(bind(socketFileHandle, (struct sockaddr*)&serverAddress, sizeof(serverAddress)) != 0){
+        printf("socket bind failed...\n");
+        exit(0);
+    }
+    else
+        printf("Socket successfully binded..\n");
 
     // Endlos-Schleife, die nur bei Bedingungen abbricht, damit Chat endlos weitergehen kann
     for(;;) {
